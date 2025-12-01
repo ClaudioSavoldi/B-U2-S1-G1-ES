@@ -24,6 +24,11 @@ namespace B_U2_S1_G1_ES.Services
             return false;
         }
 
+        public List<Book> GetAllBooks()
+        {
+            return _context.Books.ToList();
+        }
+
 
     }
 }

@@ -16,9 +16,20 @@ namespace B_U2_S1_G1_ES.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult BookList()
         {
-            return View();
+            
+            var books = _bookService.GetAllBooks();
+            return View(books); 
+        }
+
+
+
+
+        public IActionResult AddBook()
+        {
+            var bookVm = new AddBookViewModel();
+            return View(bookVm); 
         }
 
         [HttpPost]
@@ -27,7 +38,7 @@ namespace B_U2_S1_G1_ES.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("Index", addBookViewModel);
+                return View("AddBook", addBookViewModel);
             }
 
 
@@ -45,13 +56,13 @@ namespace B_U2_S1_G1_ES.Controllers
             if (!result)
             {
                 TempData["CreationError"] = "Errore durante la creazione del prodotto";
-                return RedirectToAction("Index", "Book"); 
+                return RedirectToAction("AddBook"); 
             }
             
                
             
 
-            return RedirectToAction("Index");
+            return RedirectToAction("BookList");
 
 
         }
