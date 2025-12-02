@@ -115,12 +115,6 @@ namespace B_U2_S1_G1_ES.Controllers
 
             var success = _bookService.Update(book);
 
-            if (!success)
-            { 
-                return NotFound();
-            }
-
-
             return RedirectToAction("ManageBook");
         }
 
