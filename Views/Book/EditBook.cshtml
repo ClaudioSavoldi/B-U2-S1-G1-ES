@@ -1,0 +1,42 @@
+﻿@model B_U2_S1_G1_ES.ViewModels.AddBookViewModel
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h2>Modifica Libro</h2>
+
+<form asp-action="UpdateBook" asp-controller="Book" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Author" class="form-label"></label>
+        <input asp-for="Author" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Genre" class="form-label">Genre *</label>
+        <select asp-for="Genre" class="form-control" asp-items="@(new SelectList(Model.Genres))">
+            <option value="">-- Select Genre --</option>
+        </select>
+        <span asp-validation-for="Genre" class="text-danger small"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="IsAvailable" class="form-check-input" type="checkbox" />
+        <label asp-for="IsAvailable" class="form-check-label"></label>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="CoverImage" class="form-label"></label>
+        <input asp-for="CoverImage" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+</form>

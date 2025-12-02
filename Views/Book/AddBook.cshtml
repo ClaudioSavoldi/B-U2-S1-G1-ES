@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Add Books";
 }
-
+@if (TempData["CreationError"] != null)
+{
+    <h4 style="color:red">@TempData["CreationError"]</h4>
+    <br />
+}
 
 <form asp-controller ="Book" asp-action="Save" method="post">
    
@@ -24,11 +28,12 @@
 
         <!-- Genere -->
         <div class="col-md-8 mb-3">
-            <label asp-for="Genre" class="form-label">Genere *</label>
-            <input asp-for="Genre" class="form-control" placeholder="Inserisci il Genere del libro" />
+            <label asp-for="Genre" class="form-label">Genre *</label>
+            <select asp-for="Genre" class="form-control" asp-items="@(new SelectList(Model.Genres))">
+                <option value="">-- Select Genre --</option>
+            </select>
             <span asp-validation-for="Genre" class="text-danger small"></span>
         </div>
-    </div>
 
     <div class="row">
         <!-- Autore -->

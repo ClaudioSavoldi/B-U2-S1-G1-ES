@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
+
 namespace B_U2_S1_G1_ES.Models.Entity
 {
     public class Book
@@ -18,7 +20,7 @@ namespace B_U2_S1_G1_ES.Models.Entity
         [Required]
         public string CoverImage { get; set; }
 
-
+     
 
     }
 }

@@ -1,0 +1,52 @@
+﻿@model List<B_U2_S1_G1_ES.Models.Entity.Book>
+
+@{
+    ViewData["Title"] = "Manage Books";
+}
+
+
+<h2>Lista dei libri</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Titolo</th>
+            <th>Autore</th>
+            <th>Genere</th>
+            <th>Disponibile</th>
+            <th>Copertina</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td class="align-middle">@book.Title</td>
+                <td class="align-middle">@book.Author</td>
+                <td class="align-middle">@book.Genre</td>
+                <td class="align-middle">@(book.IsAvailable ? "Sì" : "No")</td>
+                <td class="m-auto">
+                    @if (!string.IsNullOrEmpty(book.CoverImage))
+                    {
+                        <img src="@book.CoverImage" alt="cover" style="height:80px" />
+                    }
+                </td>
+                <td class="align-middle">
+                    <a asp-controller="Book"
+                       asp-action="EditBook"
+                       asp-route-id="@book.Id"
+                       class="btn btn-warning btn-sm me-2">
+                        Edit
+                    </a>
+                    <a asp-controller="Book"
+                       asp-action="DeleteBook"
+                       asp-route-id="@book.Id"
+                       class="btn btn-danger btn-sm"
+                       >
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -2,6 +2,7 @@
 using B_U2_S1_G1_ES.Services;
 using B_U2_S1_G1_ES.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace B_U2_S1_G1_ES.Controllers
 {
@@ -15,17 +16,18 @@ namespace B_U2_S1_G1_ES.Controllers
             _bookService = bookService;
         }
 
-
-        public IActionResult BookList()
+        //Grid
+        public IActionResult ManageBook()
         {
             
             var books = _bookService.GetAllBooks();
             return View(books); 
         }
+       
 
 
 
-
+        //AddBook
         public IActionResult AddBook()
         {
             var bookVm = new AddBookViewModel();
@@ -62,11 +64,75 @@ namespace B_U2_S1_G1_ES.Controllers
                
             
 
-            return RedirectToAction("BookList");
+            return RedirectToAction("ManageBook");
 
 
         }
 
+
+        //Get Single Book to Edit
+        [HttpGet]
+        public IActionResult EditBook(Guid id)
+        {
+            var book = _bookService.GetBookById(id);
+
+            if (book == null)
+            { 
+                return NotFound(); 
+            }
+
+            var viewModel = new AddBookViewModel
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Genre = book.Genre,
+                IsAvailable = book.IsAvailable,
+                CoverImage = book.CoverImage
+            };
+
+            return View(viewModel);
+
+
+        }
+
+        //edit
+        [HttpPost]
+        public IActionResult UpdateBook(AddBookViewModel addBookViewModel)
+        {
+            if (!ModelState.IsValid)
+                return View("EditBook", addBookViewModel);
+
+            var book = new Book
+            {
+                Id = addBookViewModel.Id,
+                Title = addBookViewModel.Title,
+                Author = addBookViewModel.Author,
+                Genre = addBookViewModel.Genre,
+                IsAvailable = addBookViewModel.IsAvailable,
+                CoverImage = addBookViewModel.CoverImage
+            };
+
+            var success = _bookService.Update(book);
+
+            if (!success)
+            { 
+                return NotFound();
+            }
+
+
+            return RedirectToAction("ManageBook");
+        }
+
+        public IActionResult DeleteBook(Guid id)
+        {
+            var result = _bookService.Delete(id);
+
+            if (!result)
+                return NotFound();
+
+            return RedirectToAction("ManageBook");
+        }
 
 
     }

@@ -17,6 +17,15 @@ namespace B_U2_S1_G1_ES.ViewModels
         [Required]
         public string CoverImage { get; set; }
 
+        // Lista generi per la select
+        public List<string> Genres { get; set; } = new()
+    {
+        "Epic-Fantasy",
+        "Dragon-Fantasy",
+        "High-Fantasy",
+        "Dark-Fantasy",
+        "Magic-Fantasy"
+    };
 
     }
 }
