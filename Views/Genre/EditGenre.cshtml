@@ -1,0 +1,31 @@
+﻿@model B_U2_S1_G1_ES.ViewModels.GenreViewModel
+
+@{
+    ViewData["Title"] = "Edit Genre";
+}
+
+<h2>Edit Genre</h2>
+
+<form asp-action="Update" asp-controller="Genre" method="post">
+    <!-- Hidden Id -->
+    <input asp-for="Id" type="hidden" />
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" placeholder="Enter genre name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter genre description"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="ManageGenre" class="btn btn-secondary ms-2">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

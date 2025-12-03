@@ -1,0 +1,30 @@
+﻿@model List<B_U2_S1_G1_ES.Models.Entity.Genre>
+
+<h2>All Genres</h2>
+
+<a asp-action="AddGenre" class="btn btn-success mb-3">Add New Genre</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var genre in Model)
+        {
+            <tr>
+                <td>@genre.Name</td>
+                <td>@genre.Description</td>
+                <td>@genre.CreatedAt.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="EditGenre" asp-route-id="@genre.Id" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <a asp-action="DeleteGenre" asp-route-id="@genre.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

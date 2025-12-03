@@ -18,11 +18,11 @@ namespace B_U2_S1_G1_ES.Controllers
 
         //Grid
         public IActionResult ManageBook()
-        {
+       {
             
-            var books = _bookService.GetAllBooks();
-            return View(books); 
-        }
+           var books = _bookService.GetAllBooks();
+          return View(books); 
+       }
        
 
 
@@ -49,7 +49,7 @@ namespace B_U2_S1_G1_ES.Controllers
                 Id = Guid.NewGuid(),
                 Title = addBookViewModel.Title,
                 Author = addBookViewModel.Author,
-                Genre = addBookViewModel.Genre,
+                //Genre = addBookViewModel.Genre,
                 IsAvailable = addBookViewModel.IsAvailable,
                 CoverImage = addBookViewModel.CoverImage
             };
@@ -108,7 +108,7 @@ namespace B_U2_S1_G1_ES.Controllers
                 Id = addBookViewModel.Id,
                 Title = addBookViewModel.Title,
                 Author = addBookViewModel.Author,
-                Genre = addBookViewModel.Genre,
+                //Genre = addBookViewModel.Genre,
                 IsAvailable = addBookViewModel.IsAvailable,
                 CoverImage = addBookViewModel.CoverImage
             };

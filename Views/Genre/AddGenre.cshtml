@@ -1,0 +1,21 @@
+﻿@model B_U2_S1_G1_ES.ViewModels.GenreViewModel
+
+<h2>Add Genre</h2>
+
+<form asp-action="Save" method="post">
+
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Genre</button>
+
+</form>
