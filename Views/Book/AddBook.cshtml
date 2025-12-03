@@ -35,6 +35,18 @@
             <span asp-validation-for="Genre" class="text-danger small"></span>
         </div> *@
 
+
+        <select asp-for="GenreId" class="form-control">
+    <option value="">-- Select Genre --</option>
+    @foreach (var genre in Model.Genres)
+    {
+        <option value="@genre.Id">
+            @genre.Name
+        </option>
+    }
+</select>
+
+
     <div class="row">
         <!-- Autore -->
         <div class="col-md-6 mb-3">

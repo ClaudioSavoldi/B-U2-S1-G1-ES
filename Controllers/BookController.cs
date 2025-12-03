@@ -10,10 +10,13 @@ namespace B_U2_S1_G1_ES.Controllers
     {
 
         private readonly BookService _bookService;
+        private readonly GenreService _genreService;
 
-        public BookController(ILogger<BookController> logger, BookService bookService)
+
+        public BookController(ILogger<BookController> logger, BookService bookService, GenreService genreService)
         {           
             _bookService = bookService;
+            _genreService = genreService;
         }
 
         //Grid
@@ -28,9 +31,13 @@ namespace B_U2_S1_G1_ES.Controllers
 
 
         //AddBook
-        public IActionResult AddBook()
+        public async Task< IActionResult> AddBook()
         {
-            var bookVm = new AddBookViewModel();
+            var bookVm = new AddBookViewModel
+            {
+                Genres = await _genreService.GetAllGenres()
+              };
+            
             return View(bookVm); 
         }
 
@@ -49,7 +56,7 @@ namespace B_U2_S1_G1_ES.Controllers
                 Id = Guid.NewGuid(),
                 Title = addBookViewModel.Title,
                 Author = addBookViewModel.Author,
-                //Genre = addBookViewModel.Genre,
+                GenreId = addBookViewModel.GenreId,
                 IsAvailable = addBookViewModel.IsAvailable,
                 CoverImage = addBookViewModel.CoverImage
             };
@@ -86,7 +93,7 @@ namespace B_U2_S1_G1_ES.Controllers
                 Id = book.Id,
                 Title = book.Title,
                 Author = book.Author,
-                Genre = book.Genre,
+                GenreId = book.GenreId,
                 IsAvailable = book.IsAvailable,
                 CoverImage = book.CoverImage
             };
@@ -108,7 +115,7 @@ namespace B_U2_S1_G1_ES.Controllers
                 Id = addBookViewModel.Id,
                 Title = addBookViewModel.Title,
                 Author = addBookViewModel.Author,
-                //Genre = addBookViewModel.Genre,
+                GenreId = addBookViewModel.GenreId,
                 IsAvailable = addBookViewModel.IsAvailable,
                 CoverImage = addBookViewModel.CoverImage
             };
